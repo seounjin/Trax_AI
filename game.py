@@ -24,11 +24,9 @@ class Game():
                 continue
 
             a,b = self.at.auto_set_tile()  # 자동으로 착수 타일
-            #time.sleep(0.1)
+            time.sleep(0.5)
             self.map.auto_complete(a, b)  # 자동완성기능
 
-
-            #time.sleep()
 
     def handle_events(self):
         events = pg.event.get()
