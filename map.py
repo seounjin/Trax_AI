@@ -135,8 +135,8 @@ class DrawMap:
         if mX == self.white_x and mY == self.white_y:
             print(color, "고리 완성 탈출!!!!!!!!!!!!!!!!!!!!!!!")
             self.init_t=True
-            #time.sleep(5)
-            #self.init_tile() # 배열 초기화
+            
+            sys.exit()
             return
 
         for i in range(4):
@@ -205,6 +205,8 @@ class DrawMap:
         #time.sleep(5)
 
     def auto_complete(self, x, y):
+        if x == -5 and y == -5: #처음 착수할시 리턴종료
+            return
 
         if x == -1 and y == -1:
             return

@@ -2,6 +2,8 @@ import random
 from collections import deque
 import map as mp
 
+
+
 class Auto:
     def __init__(self,adjacent_tiles =deque()):
         self.adjacent_tiles = adjacent_tiles
@@ -23,11 +25,11 @@ class Auto:
         # 처음으로 타일 착수하는 조건문
         if mp.mapArray[10][10] == 0: # 처음 타일 착수할 자리
             first_t = [33, 55]
-
             ran = random.sample(first_t, 1)
             mp.mapArray[10][10] = ran[0]
             self.enque_adjacent_tile(10,10)
-            return 0,0
+
+            return -5,-5,ran[0]
 
         # 큐값에서 초록색타일이 아닌 좌표 값제거 반복문
         # print(self.adjacent_tiles)
@@ -41,7 +43,8 @@ class Auto:
 
         if mp.mapArray[t_x][t_y] !=0:
             self.adjacent_tiles.remove([t_x, t_y])
-            return -1,-1
+            return -1,-1,0
+
         # 뽑아낸 큐에서 값 제거
         self.adjacent_tiles.remove([t_x,t_y])
 
@@ -83,14 +86,15 @@ class Auto:
 
         if len(r_tile)==0:
             #print("0일때",t_x,t_y)
-            return -1,-1
+            return -1,-1 ,0
 
         #print("색깔",r_tile)
         ran2 = random.sample(r_tile, 1)
         mp.mapArray[t_x][t_y] = ran2[0]
         self.enque_adjacent_tile(t_x,t_y)
 
-        return t_x,t_y
+
+        return t_x,t_y , ran2[0]
 
 
 

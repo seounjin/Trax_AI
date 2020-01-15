@@ -2,8 +2,8 @@ import pygame as pg
 import sys
 import map
 import auto_ai as att
-import  time
 
+import MCTS as mcts
 
 class Game():
 
@@ -14,18 +14,36 @@ class Game():
         self.map = map.DrawMap(self)
         self.at = att.Auto()
 
+        self.mt = mcts.Tree_Node()
+        #self.ex_mov = None
+
+
     def main_loop(self):
+
+        root = self.mt.make_root() # 루트노느 생성
+        current = root
+
         while True:
             self.handle_events()
             self.map_draw()
 
             if self.map.init_t:
                 self.map.init_tile(self.map.init_t)
+                current.backup(1)  # 겜 끝나면 백업
                 continue
 
-            a,b = self.at.auto_set_tile()  # 자동으로 착수 타일
-            time.sleep(0.5)
+            current = current.select_leaf()  # 리프 검사
+
+            a,b,tile_at = self.at.auto_set_tile()  # 자동으로 착수 타일 리턴값 x,y,tile
+
+
+
+            #current.leaf.expand(1)  # 확장 한번만 되게 해야함
+
             self.map.auto_complete(a, b)  # 자동완성기능
+
+
+            break
 
 
     def handle_events(self):
