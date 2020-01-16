@@ -1,7 +1,7 @@
 import pygame as pg
 import sys
 import map
-import auto_ai as att
+import auto as att
 
 import MCTS as mcts
 

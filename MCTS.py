@@ -12,7 +12,7 @@ class DummyNode(object):
 
 class MCTSNode():
 
-    def __init__(self,move,leaf_x,leaf_y,leaf_tile,parent=None):
+    def __init__(self, move,leaf_x,leaf_y,leaf_tile,parent=None):
         if parent is None:
             parent = DummyNode()
         self.move = move
