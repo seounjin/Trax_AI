@@ -3,7 +3,6 @@ from collections import deque
 import map as mp
 
 
-
 class Auto:
     def __init__(self,adjacent_tiles =deque()):
         self.adjacent_tiles = adjacent_tiles

@@ -5,7 +5,8 @@ import auto_ai as att
 
 import MCTS as mcts
 
-class Game():
+
+class Game:
 
     def __init__(self, width=1600, height=1600):
         pg.init()

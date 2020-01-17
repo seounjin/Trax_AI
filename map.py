@@ -7,8 +7,8 @@ import time
 # 2816
 # 타일수
 # 한 타일당 44픽셀
-map_x = 64
-map_y = 64
+map_x = 19
+map_y = 19
 
 tile_dict = {0: pg.image.load('tile/0.png'),
              1: pg.image.load('tile/1_tmp.png'),
