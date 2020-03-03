@@ -3,6 +3,7 @@ import server_connect
 from connector import Connector
 from battle import Battle
 import time
+from game import Game
 
 
 class Controller:
@@ -19,7 +20,7 @@ class Controller:
         self.view.btn_exit.clicked.connect(self.exit_click)
         self.view.join_btn.clicked.connect(self.join_click)
         self.view.check_btn.clicked.connect(self.check_click)
-        # self.view.btn_Ai.clicked.connect()
+        self.view.btn_Ai.clicked.connect(self.ai_vs)
 
         self.view.btn_1.clicked.connect(lambda s=None, i=1: self.set_stack_index(s, i))
         self.view.btn_Battle.clicked.connect(lambda s=1, i=2: self.set_stack_index(s, i))
@@ -33,6 +34,13 @@ class Controller:
         self.check_pass = False
         self.check_name = False
         self.check_email = False
+
+    def ai_vs(self):
+        # ##### Man Vs AI ##### #
+        color = "White"  # 항상 White 가 선공!!
+        game = Game(color, "AI", 836, 836)
+        game.ai_loop()
+        return
 
     def room_doubleclick(self, item):  # 방 번호 더블 클릭 이벤트
         self.view.room_index = self.view.room_listWidget.row(item)
@@ -65,8 +73,6 @@ class Controller:
             print("방 나가기 버튼")
             self.view.flask_connect.leave_room(self.view.room_index_id)
             self.view.flask_connect.room_request()
-
-
 
     def ready_click(self):
         print("레디버튼 클릭")
