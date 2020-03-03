@@ -6,6 +6,10 @@ class Form(QWidget):
     def __init__(self):
         super(Form, self).__init__()  # 상위 클래스 생성자 호출, 돌려받을 객체의 타입을 지정, 폼타입으로 큐위젯객체를 생성
 
+        # socketio
+        self.flask_connect = None
+        self.room_index = None
+
         # id
         self.user_id = ""
         self.room_index_id = {}
@@ -16,17 +20,19 @@ class Form(QWidget):
         self.wgt_room = QWidget()
         self.wgt_room_list = QWidget()
         self.room_listWidget = QListWidget()
+        self.signup_widget = QWidget()
 
         self.login_screen()
         self.select_screen()
         self.list_screen()
         self.room_screen()
+        self.join_screen()
         self.stack_add()
         self.show()
 
     def login_screen(self):
         # 위젯객체 생성
-        #self.wgt_Login = QWidget()
+        # self.wgt_Login = QWidget()
 
         # 레이아웃 생성
         self.vb = QVBoxLayout()
@@ -44,13 +50,11 @@ class Form(QWidget):
 
         # 라벨
         self.lbl_Id = QLabel("ID: ")
-        self.lbl_Ps = QLabel("PASSWARD: ")
+        self.lbl_Ps = QLabel("PASSWORD: ")
 
         # 텍스트에디터
         self.login_In = QLineEdit()
         self.passward_In = QLineEdit()
-        self.login_In.setFixedWidth(200)
-        self.passward_In.setFixedWidth(200)
 
         # 버튼
         self.btn_1 = QPushButton("LOGIN")
@@ -69,7 +73,6 @@ class Form(QWidget):
         self.hbBot.addWidget(self.btn_2)
 
     def select_screen(self):
-
         # 레이아웃 생성
         self.select_vb = QVBoxLayout()
 
@@ -85,16 +88,18 @@ class Form(QWidget):
         self.wgt_select.setLayout(self.select_vb)
 
     def list_screen(self):
-        #self.listWidget.setAlternateColors(True)
+        # self.listWidget.setAlternateColors(True)
 
         # 레이아웃
         self.list_top_vb = QVBoxLayout()
         self.list_bottom_vb = QVBoxLayout()
         self.list_mainLayout = QVBoxLayout()
         self.btn_renew = QPushButton("renew")
+        self.btn_exit = QPushButton("exit")
 
         self.list_top_vb.addWidget(self.room_listWidget)
         self.list_bottom_vb.addWidget(self.btn_renew)
+        self.list_bottom_vb.addWidget(self.btn_exit)
 
         self.list_mainLayout.addLayout(self.list_top_vb)
         self.list_mainLayout.addLayout(self.list_bottom_vb)
@@ -106,7 +111,6 @@ class Form(QWidget):
             self.room_listWidget.insertItem(num, "빈 방")
 
     def room_screen(self):
-
         # 레이아웃 생성
         self.room_vb = QVBoxLayout()
         self.room_hTop = QHBoxLayout()
@@ -142,13 +146,55 @@ class Form(QWidget):
         self.room_hBot.addWidget(self.room_ready)
         self.room_hBot.addWidget(self.room_out)
 
+    def join_screen(self):
+        self.join_form = QFormLayout()
+        self.setLayout(self.join_form)
+
+        self.box_id = QHBoxLayout()
+        self.id = QLineEdit()
+        self.check_btn = QPushButton("check")
+        self.box_id.addWidget(self.id)
+        self.box_id.addWidget(self.check_btn)
+        self.join_form.addRow("ID: ", self.box_id)
+
+        self.id_check = QLabel("ID 중복검사를 해주십쇼")
+        self.join_form.addWidget(self.id_check)
+
+        self.password = QLineEdit()
+        self.join_form.addRow("password: ", self.password)
+        self.password2 = QLineEdit()
+        self.join_form.addRow("한번더: ", self.password2)
+        self.password_check = QLabel(" ")
+        self.join_form.addWidget(self.password_check)
+
+        self.name = QLineEdit()
+        self.join_form.addRow("name: ", self.name)
+
+        self.email = QLineEdit()
+        self.join_form.addRow("email: ", self.email)
+
+        self.box_btn = QHBoxLayout()
+        self.join_btn = QPushButton("join")
+        self.exit_btn = QPushButton("exit")
+        self.box_btn.addWidget(self.join_btn)
+        self.box_btn.addWidget(self.exit_btn)
+        self.join_form.addRow(self.box_btn)
+        self.signup_widget.setLayout(self.join_form)
+
     def stack_add(self):
         self.st_layout = QStackedLayout()
         self.st_layout.addWidget(self.wgt_login)
         self.st_layout.addWidget(self.wgt_select)
-        #self.st_layout.addWidget(self.room_listWidget)
+        # self.st_layout.addWidget(self.room_listWidget)
         self.st_layout.addWidget(self.wgt_room_list)
         self.st_layout.addWidget(self.wgt_room)
+        self.st_layout.addWidget(self.signup_widget)
 
         self.setLayout(self.st_layout)
 
+    def msg_set(self,content):
+        # 메세지 박스
+        msgBox = QMessageBox()
+        msgBox.setText(content)
+        msgBox.setStandardButtons(QMessageBox.Ok)
+        msgBox.exec()
