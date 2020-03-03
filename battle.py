@@ -1,11 +1,16 @@
 from connector import SocketNamespace
-
+from game import Game
+from collections import deque
+import time
 
 class Battle(SocketNamespace):
     def __init__(self, namespace, view):
         super(Battle, self).__init__(namespace)  # 부모
         self.namespace = namespace
         self.view = view
+        self.game = None
+        self.que = deque()
+        self.room = None
 
     def ready_request(self, data):
         self.emit('battle', data)  # 방번호,레디 유무
@@ -19,7 +24,15 @@ class Battle(SocketNamespace):
     def leave_room(self, data):  # 방에서 나가기
         self.emit('leave', data)  # emit(이벤트, json)
 
+    def game_exit(self, data):  # 게임 종료
+        self.emit('exit', data)
+
     def on_message(self, data):  # 들어온 메세지 확인
+
+        if "tile_set" in data:
+            print("타일셋받음")
+            self.que.append(data)
+
         self.view_update(data)
 
     def on_connect(self):  # 연결
@@ -28,9 +41,25 @@ class Battle(SocketNamespace):
     def on_disconnect(self):
         print('서버 연결 끊어짐요')
 
+
+    # 게임 데이터 보내기.
+    def tile_set_request(self, sender, x, y, tile):
+        self.emit('battle', {"tile_set": {"room_index": self.view.room_index, "Sender": sender,
+                                          "X": x, "Y": y, "Tile": tile}})
+
     def view_update(self, data):
 
-        if "room_Info" in data:
+        is_start = False
+        is_end = False
+
+        if "full" == data:  # 방 조인 가능성
+            print("풀방입니다")
+            self.room = False
+
+        elif "pos" == data:
+            self.room = True
+
+        elif "room_Info" in data:
             for num in range(3):
                 if not len(data["room_Info"][str(num)]):  # 방이 비어 있을 경우
                     self.view.room_listWidget.item(num).setText("빈방")
@@ -48,5 +77,26 @@ class Battle(SocketNamespace):
         elif "ready" in data:
             print(data["ready"])
 
-        elif data == "gamestart":
+        elif "gamestart" in data:
+            # is_start = True
             print("겜시작")
+            a = data["gamestart"]
+            print(a, "print a")
+            print(self.view.user_id)
+            a = data["gamestart"]
+            color = a[self.view.user_id + str("님")]
+            print(color)
+            self.game = Game(color, None, 836, 836)
+            # self.game.mouse_loop_init()
+            self.game.mouse_loop(self.view.flask_connect, self.que)
+
+        # 바로 위의 elif 문에서 게임이 시작된다는 알림을 받고 진입하는 분기문.
+        # if is_start:
+        #     is_end = self.game.mouse_loop(self.view.flask_connect, data)
+
+            # while is_start:
+            #
+            #     if len(self.que) == 1:
+            #         data = self.que.popleft()
+            #
+            #     is_start = self.game.mouse_loop(self.view.flask_connect, data)
