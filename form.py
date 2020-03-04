@@ -57,8 +57,8 @@ class Form(QWidget):
         self.passward_In = QLineEdit()
 
         # 버튼
-        self.btn_1 = QPushButton("LOGIN")
-        self.btn_2 = QPushButton("SING UP")
+        self.login_btn = QPushButton("LOGIN")
+        self.sign_btn = QPushButton("SIGN UP")
 
         # 레이아웃에 ID 추가
         self.hbTop.addWidget(self.lbl_Id)
@@ -69,8 +69,8 @@ class Form(QWidget):
         self.hbMid.addWidget(self.passward_In)
 
         # 레이아웃에 버튼 추가
-        self.hbBot.addWidget(self.btn_1)
-        self.hbBot.addWidget(self.btn_2)
+        self.hbBot.addWidget(self.login_btn)
+        self.hbBot.addWidget(self.sign_btn)
 
     def select_screen(self):
         # 레이아웃 생성

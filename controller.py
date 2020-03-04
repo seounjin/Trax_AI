@@ -21,11 +21,12 @@ class Controller:
         self.view.join_btn.clicked.connect(self.join_click)
         self.view.check_btn.clicked.connect(self.check_click)
         self.view.btn_Ai.clicked.connect(self.ai_vs)
+        self.view.login_btn.clicked.connect(self.login_click)
 
-        self.view.btn_1.clicked.connect(lambda s=None, i=1: self.set_stack_index(s, i))
+        # self.view.login_btn.clicked.connect(lambda s=None, i=1: self.set_stack_index(s, i))
         self.view.btn_Battle.clicked.connect(lambda s=1, i=2: self.set_stack_index(s, i))
         self.view.room_out.clicked.connect(lambda s=2, i=2: self.set_stack_index(s, i))
-        self.view.btn_2.clicked.connect(lambda s=0, i=4: self.set_stack_index(s, i))
+        self.view.sign_btn.clicked.connect(lambda s=0, i=4: self.set_stack_index(s, i))
         self.view.exit_btn.clicked.connect(lambda s=None, i=0: self.set_stack_index(s, i))
         # self.view.room_listWidget.itemDoubleClicked.connect(lambda s=None, i=3: self.set_stack_index(s, i))
 
@@ -59,12 +60,12 @@ class Controller:
     def set_stack_index(self, s, index):
         self.view.st_layout.setCurrentIndex(index)
 
-        if index == 1:  # 로그인 버튼
-            #server_connect.login()
-            self.view.user_id = self.view.login_In.text()
-            server_connect.login_request(self.view.user_id)
+        # if index == 1:  # 로그인 버튼
+        #     #server_connect.login()
+        #     self.view.user_id = self.view.login_In.text()
+        #     server_connect.login_request(self.view.user_id)
 
-        elif index == 2 and s == 1:  # 1:1 버튼
+        if index == 2 and s == 1:  # 1:1 버튼
             self.connector = Connector()
             self.view.flask_connect = self.connector.register_namespace(Battle('/battle', self.view))
             self.view.flask_connect.room_request()
@@ -156,9 +157,16 @@ class Controller:
         else:
             self.view.id_check.setText("사용할 수 없는 ID 입니다")
 
+    def login_click(self):
+        self.view.user_id = self.view.login_In.text()
+        json = {'id': self.view.user_id, 'password': self.view.passward_In.text()}
+        server_connect.login_request(json)
 
-
-
+        time.sleep(1)
+        if server_connect.login_check == True:
+            self.set_stack_index(0, 1)
+        else:
+            self.view.msg_set("ID와 password를 다시 확인해주시기 바랍니다")
 
 
 
