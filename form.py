@@ -56,6 +56,7 @@ class Form(QWidget):
         self.login_In = QLineEdit()
         self.passward_In = QLineEdit()
 
+
         # 버튼
         self.login_btn = QPushButton("LOGIN")
         self.sign_btn = QPushButton("SIGN UP")
@@ -71,6 +72,7 @@ class Form(QWidget):
         # 레이아웃에 버튼 추가
         self.hbBot.addWidget(self.login_btn)
         self.hbBot.addWidget(self.sign_btn)
+
 
     def select_screen(self):
         # 레이아웃 생성
@@ -157,7 +159,7 @@ class Form(QWidget):
         self.box_id.addWidget(self.check_btn)
         self.join_form.addRow("ID: ", self.box_id)
 
-        self.id_check = QLabel("ID 중복검사를 해주십쇼")
+        self.id_check = QLabel("ID 중복검사를 해주세요")
         self.join_form.addWidget(self.id_check)
 
         self.password = QLineEdit()
