@@ -14,7 +14,7 @@
   1:1 대전만 할시 <임시> 사용
   
 + ### 참고
-  <https://github.com/hayoung-kim/mcts-tic-tac-toe>
+  <https://github.com/hayoung-kim/mcts-tic-tac-toe>  
   <https://github.com/brilee/python_uct>
   
 
