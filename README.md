@@ -15,5 +15,6 @@
   
 + ### 참고
   <https://github.com/hayoung-kim/mcts-tic-tac-toe>
+  <https://github.com/brilee/python_uct>
   
 
