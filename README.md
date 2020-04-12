@@ -12,7 +12,7 @@
 
 + ### 사용 방법
   다수의 플레이어와 게임을 대전할시에 socketio 사용 <https://github.com/seounjin/flask-socketio>    
-  1:1 대전만 할시 <임시> 사용
+  AI 대전만 할시 <임시> 사용
   
 + ### 참고
   <http://www.traxgame.com/>  
