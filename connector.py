@@ -21,7 +21,7 @@ class Connector:
 
 class SocketNamespace(socketio.ClientNamespace):
     def __init__(self, namespace):
-        super(SocketNamespace,self).__init__()
+        super(SocketNamespace, self).__init__()
         self.r_data = {}
         self.namespace = namespace
 

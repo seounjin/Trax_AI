@@ -6,6 +6,8 @@ class Form(QWidget):
     def __init__(self):
         super(Form, self).__init__()  # 상위 클래스 생성자 호출, 돌려받을 객체의 타입을 지정, 폼타입으로 큐위젯객체를 생성
 
+        self.setWindowTitle("Trax_AI")
+
         # socketio
         self.flask_connect = None
         self.room_index = None
@@ -56,6 +58,11 @@ class Form(QWidget):
         self.login_In = QLineEdit()
         self.passward_In = QLineEdit()
 
+        self.passward_In.setEchoMode(QLineEdit.Password)
+
+        self.login_In.setFixedWidth(250)
+        self.passward_In.setFixedWidth(250)
+
 
         # 버튼
         self.login_btn = QPushButton("LOGIN")
@@ -64,6 +71,7 @@ class Form(QWidget):
         # 레이아웃에 ID 추가
         self.hbTop.addWidget(self.lbl_Id)
         self.hbTop.addWidget(self.login_In)
+
 
         # 레이아웃에 페스워드
         self.hbMid.addWidget(self.lbl_Ps)
@@ -163,8 +171,10 @@ class Form(QWidget):
         self.join_form.addWidget(self.id_check)
 
         self.password = QLineEdit()
+        self.password.setEchoMode(QLineEdit.Password)
         self.join_form.addRow("password: ", self.password)
         self.password2 = QLineEdit()
+        self.password2.setEchoMode(QLineEdit.Password)
         self.join_form.addRow("한번더: ", self.password2)
         self.password_check = QLabel(" ")
         self.join_form.addWidget(self.password_check)
