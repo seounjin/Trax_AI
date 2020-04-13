@@ -12,7 +12,7 @@
   pygame, pyside2, numpy, python-socketio[client]  
 
 + ### 사용 방법
-  다수의 플레이어와 게임을 대전할시 [flask-socketio](https://github.com/seounjin/flask-socketio) 같이 사용  
+  다수의 플레이어와 게임 [flask-socketio](https://github.com/seounjin/flask-socketio) 같이 사용  
   AI 대전만 할시 [git.flylofty](https://github.com/flylofty/Trax_with_MCTS)
   
 + ### 참고
