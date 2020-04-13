@@ -1,7 +1,6 @@
 from PySide2.QtWidgets import *
-from controller import Controller
-import server_connect
-
+from View.controller import Controller
+from SocketIo import server_connect
 
 if __name__ == '__main__':
     app = QApplication()

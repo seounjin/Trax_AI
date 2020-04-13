@@ -1,9 +1,9 @@
 import pygame
 import sys
-import draw_map
-import auto
+from Game import auto, draw_map
+
+
 # 완성된 고리를 확인하고 싶을 때 사용
-import time
 
 # ########## DrawMap 객체를 만들고 메서드를 통해서만 해당 객체(클래스)의 변수에 접근을 함. ########## #
 

@@ -1,7 +1,5 @@
-import numpy
-import time
 from random import *
-import draw_map
+from Game import draw_map
 
 
 class Simulation:

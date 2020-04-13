@@ -1,8 +1,7 @@
-import math
-import draw_map
+from Game import draw_map
+from Game.MCTS import simulation
 import copy
 from random import *
-import simulation
 import numpy as np
 
 

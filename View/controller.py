@@ -1,9 +1,9 @@
-import form
-import server_connect
-from connector import Connector
-from battle import Battle
+from View import form
+from SocketIo import server_connect
+from SocketIo.connector import Connector
+from SocketIo.battle import Battle
 import time
-from game import Game
+from Game.game import Game
 
 
 class Controller:

@@ -1,7 +1,7 @@
-from connector import SocketNamespace
-from game import Game
+from SocketIo.connector import SocketNamespace
+from Game.game import Game
 from collections import deque
-import time
+
 
 class Battle(SocketNamespace):
     def __init__(self, namespace, view):

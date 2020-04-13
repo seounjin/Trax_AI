@@ -1,8 +1,6 @@
-from random import *
-import draw_map
-import mcts
+from Game import draw_map
+from Game.MCTS import mcts
 import copy
-import math
 import time
 
 
