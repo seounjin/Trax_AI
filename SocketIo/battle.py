@@ -49,9 +49,6 @@ class Battle(SocketNamespace):
 
     def view_update(self, data):
 
-        is_start = False
-        is_end = False
-
         if "full" == data:  # 방 조인 가능성
             print("풀방입니다")
             self.room = False
@@ -78,7 +75,6 @@ class Battle(SocketNamespace):
             print(data["ready"])
 
         elif "gamestart" in data:
-            # is_start = True
             print("겜시작")
             a = data["gamestart"]
             print(a, "print a")
@@ -89,14 +85,3 @@ class Battle(SocketNamespace):
             self.game = Game(color, 836, 836)
             # self.game.mouse_loop_init()
             self.game.mouse_loop(self.view.flask_connect, self.que)
-
-        # 바로 위의 elif 문에서 게임이 시작된다는 알림을 받고 진입하는 분기문.
-        # if is_start:
-        #     is_end = self.game.mouse_loop(self.view.flask_connect, data)
-
-            # while is_start:
-            #
-            #     if len(self.que) == 1:
-            #         data = self.que.popleft()
-            #
-            #     is_start = self.game.mouse_loop(self.view.flask_connect, data)

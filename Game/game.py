@@ -118,6 +118,7 @@ class Game:
                 self.real_start = False
                 self.p_x = self.p_y = 9
                 self.system_count = 0
+                pygame.quit()
                 return
 
             # print(self.system_count)
