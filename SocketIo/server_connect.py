@@ -5,7 +5,7 @@ sio = socketio.Client()
 
 client_id_check = None
 join_check = False
-login_check = False
+login_check = -1
 
 def sio_connect():
     sio.connect('http://127.0.0.1:5000')
@@ -26,14 +26,15 @@ def join_request(data):  # 회원가입 요청
 def exit_request(data):  # 종료
     sio.emit('exit', data)  # emit(이벤트, json)
 
-@sio.on('login')  # T : 는 가능, F:id가 없거나 틀리거나 비밀번호가 틀림
+@sio.on('login')  # T : 는 가능, F:id가 없거나 틀리거나 비밀번호가 틀림, S:같은 아이디로 로그인
 def login_message(data):
     global login_check
-    #print(data + '님이 로그인 되심')
     if data == 'F':
-        login_check = False
+        login_check = 0
+    elif data == 'T':
+        login_check = 1
     else:
-        login_check = True
+        login_check = 2
 
 @sio.on('client_id_check')
 def id_check_message(data):

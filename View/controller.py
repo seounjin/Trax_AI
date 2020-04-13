@@ -163,11 +163,12 @@ class Controller:
         server_connect.login_request(json)
 
         time.sleep(1)
-        if server_connect.login_check == True:
+        if server_connect.login_check == 1:
             self.set_stack_index(0, 1)
-        else:
+        elif server_connect.login_check == 0:
             self.view.msg_set("ID와 password를 다시 확인해주시기 바랍니다")
-
+        else:
+            self.view.msg_set("현재 ID가 접속중입니다")
 
 
 
